@@ -1,4 +1,4 @@
-# 🫀 3D Body Surface Annotation Tool
+# 3D Body Surface Annotation Tool
 
 A browser-based server application for annotating 3D human body meshes and calculating **Body Surface Area (BSA)** percentages. Designed for medical researchers, dermatologists, and clinical annotators who need to precisely mark regions of interest on 3D human models.
 
@@ -27,7 +27,7 @@ The interface is split into four panels:
 ```
 ┌──────────────┬────────────────┬──────────────────────┬──────────────┐
 │  Image List  │  Image Preview │     3D Viewer        │  3D Models   │
-│              │                │  [Cursor] [Pen]       │              │
+│              │                │  [Cursor] [Pen]      │              │
 │  (directory  │  (selected     │  [Clear] [Calc BSA]  │  f_1.obj     │
 │   browser)   │   image large) │                      │  f_2.obj     │
 │              │                │   <Three.js canvas>  │  m_1.obj ... │
@@ -38,20 +38,20 @@ The interface is split into four panels:
 
 ---
 
-## Features
+## Interface and Features
 
-### 🔐 Authentication
+### Authentication
 - Login page with username and password
 - Credentials checked against `config/whitelist.txt`
 - Server-side sessions (logout button in header)
 - Failed login shows an error message and prompts retry
 
-### 🖼 Image Viewer (Left Panels)
+### Image Viewer (Left Panels)
 - **Directory input**: type or paste any server-side filesystem path, press Enter or click `→`
 - **Image list**: all `.jpg`, `.jpeg`, and `.png` files in the directory are listed with thumbnail previews
 - **Image preview**: clicking any image in the list shows it full-size in the adjacent panel
 
-### 🧍 3D Model Viewer (Center Panel)
+### 3D Model Viewer (Center Panel)
 - Loads `.obj` files from the `assets/` folder using [Three.js](https://threejs.org/)
 - Models are automatically centered and scaled to fill the viewport
 - Realistic lighting (ambient + hemisphere + directional)
@@ -78,20 +78,10 @@ The interface is split into four panels:
 - Resets all painted triangles back to the default skin color
 - Also clears the BSA result display
 
-### 💾 Annotation Persistence
-- Annotations are **automatically saved** 800 ms after the last paint stroke (debounced)
+### Annotation Persistence
+- Annotations are automatically saved 800 ms after the last paint stroke (debounced)
 - Each user's annotations are stored separately under `annotations/<username>/<model>.json`
-- When a model is re-selected, saved annotations are **automatically restored** — including red face markings
-- A live **save-status badge** in the toolbar shows:
-  - 🟡 `● Unsaved changes` — paint is pending save
-  - 🔵 `⟳ Saving…` — write in progress
-  - 🟢 `✓ Saved` — successfully persisted (auto-hides after 4 s)
-  - 🔴 `✕ Save failed` — network or disk error
-
-### 🗂 Model Selector (Right Panel)
-- Lists all `.obj` files from the `assets/` folder
-- Female models (`f_*.obj`) shown with 👩, male models (`m_*.obj`) with 🧑
-- Shows triangle count and annotation stats for the loaded model
+- When a model is re-selected, saved annotations are automatically restored
 
 ---
 
